@@ -1,8 +1,7 @@
 ---
 name: TTT未来范式意义
 description: TTT代表的AI架构范式转变，从静态模型到演化智能体的根本革命
-type: reference
-originSessionId: 59fbd394-886c-40ae-8a0f-a5c5d491d0d7
+
 ---
 # TTT未来范式意义：从产品到生命体
 
