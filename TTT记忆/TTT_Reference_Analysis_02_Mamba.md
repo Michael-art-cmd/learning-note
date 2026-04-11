@@ -98,7 +98,7 @@ $$\text{Capacity}(h) = N \times \text{precision\_bits}$$
 |------|-------|-----|
 | 状态形式 | 固定维度向量 $h \in \mathbb{R}^N$ | 可学习模型权重 $W$ |
 | 状态大小 | 固定N（如64-128） | 可变（模型参数量） |
-| 更新机制 | 线性递推：$$h_k = \bar{A}h_{k-1} + \bar{B}x_k$$ | 梯度下降：$$W_t = W_{t-1} - \eta \nabla_W \mathcal{L}$$ |
+| 更新机制 | $线性递推：h_k = \bar{A}h_{k-1} + \bar{B}x_k$ | $梯度下降：W_t = W_{t-1} - \eta \nabla_W \mathcal{L}$ |
 | 表达能力 | 受限于向量维度 | 受限于模型结构 |
 | 记忆策略 | HiPPO衰减 + 选择性压缩 | Loss-driven选择性学习 |
 
