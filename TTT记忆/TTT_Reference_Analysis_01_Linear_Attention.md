@@ -68,7 +68,8 @@ Hidden state $S_t$ 固定大小，不随序列长度增长 → **Transformers ar
 $$\nabla_W \ell = 2(Wx_t - x_t')(x_t)^T$$
 
 **Batch GD一步更新**
-（$\eta = 1/2$）：
+（$\eta = 1/2$）
+：
 
 $$W_t = W_{t-1} - \eta \cdot 2(W_{t-1}k_t - v_t)k_t^T$$
 
