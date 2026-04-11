@@ -141,7 +141,8 @@ TTT-MLP
 ### 5.2 TTT的继承与超越
 
 **继承**：
-- Hidden state固定大小$$（d\times d）$$
+- Hidden state固定大小
+$$（d\times d）$$
 - $O(1)$每token推理复杂度
 - 可递归实现
 
