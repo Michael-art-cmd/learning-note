@@ -23,9 +23,11 @@
 
 State Space Model的核心是两个连续时间方程：
 
-**状态方程**：$h'(t) = Ah(t) + Bx(t)$
+**状态方程**：
+$h'(t) = Ah(t) + Bx(t)$
 
-**输出方程**：$y(t) = Ch(t) + Dx(t)$
+**输出方程**：
+$y(t) = Ch(t) + Dx(t)$
 
 离散化后得到：
 $$h_k = \bar{A}h_{k-1} + \bar{B}x_k$$
