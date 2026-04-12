@@ -374,7 +374,7 @@ $$\mathcal{L}_{\text{LM}} = -\sum_{t=1}^{T} \log P(x_t \mid x_1, ..., x_{t-1})$$
 
 GPT 用 Transformer 解码器（单向注意力）：
 
-$$P(x_t \mid x_{<t}) = \text{softmax}(h_t^T E)$$
+$$P(x_t \mid x_{1:t-1}) = \text{softmax}(h_t^T E)$$
 
 其中 $h_t = \text{Decoder}(x_1, ..., x_{t-1})_t$
 
