@@ -26,7 +26,9 @@ $$Q_i = \{(x_j, y_j)\}_{j=1}^{M}$$
 
 $$\theta^* = \theta - \alpha \nabla_\theta \mathcal{L}_{T_i}(\theta)$$
 
-其中 $\mathcal{L}_{T_i}$ 是任务 $T_i$ 的损失函数，$alpha$是内循环学习率。MAML的外循环优化目标为：
+其中 $\mathcal{L}_{T_i}$ 是任务 $T_i$ 的损失函数，
+$\alpha$ 
+是内循环学习率。MAML的外循环优化目标为：
 
 $$\min_\theta \sum_{T_i \sim p(\mathcal{T})} \mathcal{L}_{T_i}(\theta - \alpha \nabla_\theta \mathcal{L}_{T_i}(\theta))$$
 
