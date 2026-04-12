@@ -576,7 +576,7 @@ $$x \sim p(x) = \int p(x|z) p(z) dz$$
 | 方法 | 损失函数 | 核心思想 |
 |------|----------|----------|
 | **SimCLR（对比学习）** | $-\log\frac{\exp(\text{sim}(z_i,z_j)/\tau)}{\sum_k\exp(\text{sim}(z_i,z_k)/\tau)}$ | 正样本相似，负样本不相似 |
-| **BERT MLM（遮蔽预测）** | $-\sum_{t \in M} \log P(x_t|\tilde{X})$ | 遮蔽15%词，预测被遮蔽的词 |
+| **BERT MLM（遮蔽预测）** | $$-\sum_{t \in M} \log P(x_t | \tilde{X})$$ | 遮蔽15%词，预测被遮蔽的词 |
 | **GPT LM（自回归）** | $-\sum_t \log P(x_t | x_{<t})$ | 预测下一个token |
 | **VAE（变分框架）** | $\mathbb{E}[\log p(x|z)] - KL[q(z|x)||p(z)]$ | 重建损失 + 正则化 |
 
