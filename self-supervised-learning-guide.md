@@ -461,9 +461,9 @@ $$\mathcal{L}_{\text{VAE}} = \mathbb{E}_{q(z|x)}[\log p(x|z)] - D_{KL}(q(z|x) ||
 
 | 方法 | 对应的VAE视角 |
 |------|---------------|
-| 去噪自编码器 | $p(x|z)$ 重建干净的 $x$，输入是加噪的 $\tilde{x}$ |
-| BERT遮蔽 | $p(x_{\text{mask}}|z)$ 重建被遮蔽的词，$z$ 来自可见词 |
-| MAE | $p(x_{\text{mask}}|z)$ 重建被遮蔽的像素块 |
+| 去噪自编码器 | $p(x\mid z)$ 重建干净的 $x$，输入是加噪的 $\tilde{x}$ |
+| BERT遮蔽 | $p(x_{\text{mask}}\mid z)$ 重建被遮蔽的词，$z$ 来自可见词 |
+| MAE | $p(x_{\text{mask}}\mid z)$ 重建被遮蔽的像素块 |
 
 ### 7.3 为什么学到的表示有用
 
