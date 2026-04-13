@@ -80,7 +80,7 @@ $$\ell(W; x_t) = \|f(\tilde{x}_t; W) - x_t\|^2$$
 
 **设计原理：**
 
-1. **为什么要损坏？** 直接重建$x_t$太简单（trivial），模型需要从部分信息$\tilde{x}_t$重建完整$x_t$
+1. **为什么要损坏？** 直接重建$ x_t $太简单（trivial），模型需要从部分信息$\tilde{x}_t$重建完整$x_t$
 2. **这迫使模型做什么？** 发现$x_t$各维度之间的**相关性**（correlations）
 3. **类似什么？** 去噪自编码器（Denoising Autoencoders）的思路
 
