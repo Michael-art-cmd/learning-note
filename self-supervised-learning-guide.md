@@ -301,7 +301,7 @@ $$P(x_t | \tilde{X}) = \frac{\exp(h_t^T e_{x_t})}{\sum_{w \in V} \exp(h_t^T e_w)
 
 句子："我 喜欢 苹果"，遮蔽"喜欢"
 
-输入：$\tilde{X} = [\text{我}, \text{[MASK]}, \text{苹果}]$
+输入： $\tilde{X} = [\text{我}, \text{[MASK]}, \text{苹果}]$
 
 Transformer 编码后，位置 2 的隐藏状态：
 
@@ -340,7 +340,7 @@ $$H(p, q) = -\sum_{x_t} p(x_t) \log q(x_t)$$
 
 **关键洞察：**
 
-当训练数据足够多时，$q$ 会逼近真实分布 $p$。
+当训练数据足够多时， $q$ 会逼近真实分布 $p$。
 
 而真实分布 $p(x_t | x_{\text{context}})$ 蕴含了：
 - **语法约束**：有些词在语法上不可能出现在该位置
@@ -400,8 +400,8 @@ $$P(x_t | x_{<t}) = \text{softmax}(h_t^T E)$$
 
 假设位置 3 的计算：
 
-输入：$[\text{人工智能}, \text{正在}]$
-输出隐藏状态：$h_3$
+输入： $[\text{人工智能}, \text{正在}]$
+输出隐藏状态： $h_3$
 
 词表假设：{改变, 研究, 吃饭, 跑步}
 
@@ -465,7 +465,7 @@ $$\mathcal{L}_{\text{VAE}} = \mathbb{E}_{q(z|x)}[\log p(x|z)] - D_{KL}(q(z|x) ||
 | 方法 | 对应的VAE视角 |
 |------|---------------|
 | 去噪自编码器 | $p(x\mid z)$ 重建干净的 $x$，输入是加噪的 $\tilde{x}$ |
-| BERT遮蔽 | $p(x_{\text{mask}}\mid z)$ 重建被遮蔽的词，$z$ 来自可见词 |
+| BERT遮蔽 | $p(x_{\text{mask}}\mid z)$ 重建被遮蔽的词， $z$ 来自可见词 |
 | MAE | $p(x_{\text{mask}}\mid z)$ 重建被遮蔽的像素块 |
 
 ### 7.3 为什么学到的表示有用
@@ -580,7 +580,7 @@ $$x \sim p(x) = \int p(x|z) p(z) dz$$
 |------|----------|----------|
 | **SimCLR（对比学习）** | $-\log\frac{\exp(\text{sim}(z_i,z_j)/\tau)}{\sum_k\exp(\text{sim}(z_i,z_k)/\tau)}$ | 正样本相似，负样本不相似 |
 | **BERT MLM（遮蔽预测）** | $-\sum_{{t \in M}} \log P(x_t \mid \tilde{X})$ | 遮蔽15%词，预测被遮蔽的词 |
-| **GPT LM（自回归）** |$-\sum_t \log P(x_t \mid x_{<t})$ | 预测下一个token |
+| **GPT LM（自回归）** | $-\sum_t \log P(x_t \mid x_{<t})$ | 预测下一个token |
 | **VAE（变分框架）** | $\mathbb{E}[\log p(x\mid z)] - KL[q(z\mid x)\Vert p(z)]$ | 重建损失 + 正则化 |
 
 ---

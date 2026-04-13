@@ -63,7 +63,7 @@ ssh -p 22 <你的用户名>@<你的服务器IP>
 
 ```
 Last login: Wed Apr 9 10:00:00 2025 from 10.1.xx.xx
-[你的用户名@master ~]$
+[你的用户名@master ~] $
 ```
 
 现在你已经在服务器上了，可以执行 Linux 命令。

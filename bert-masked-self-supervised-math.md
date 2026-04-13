@@ -314,7 +314,7 @@ e_{\text{睡觉}}
 0.4 & 0.5 & 0.6 & 0.7 \\
 0.1 & 0.1 & 0.1 & 0.1 \\
 0.0 & 0.0 & 0.0 & 0.0
-\end{bmatrix}$$
+\end{bmatrix} $$
 
 **Step 3：遮蔽**
 
@@ -322,11 +322,11 @@ e_{\text{睡觉}}
 
 $$\tilde{X} = \{\text{科学家}, [\text{MASK}], \text{了}, \text{新物种}\}$$
 
-遮蔽指示器：$m = \{0, 1, 0, 0\}$
+遮蔽指示器： $m = \{0, 1, 0, 0\}$
 
 **Step 4：初始嵌入**
 
-假设`[MASK]`的嵌入：$e_{\text{MASK}} = [0.0, 0.0, 0.0, 0.0]$
+假设`[MASK]`的嵌入： $e_{\text{MASK}} = [0.0, 0.0, 0.0, 0.0]$
 
 位置编码（可学习）：
 
@@ -341,14 +341,14 @@ $$= \begin{bmatrix}
 0.0+0.02 & 0.0+0.01 & 0.0+0.02 & 0.0+0.01 \\
 0.2+0.01 & 0.3+0.01 & 0.1+0.01 & 0.4+0.01 \\
 0.3+0.02 & 0.4+0.02 & 0.5+0.02 & 0.6+0.02
-\end{bmatrix}$$
+\end{bmatrix} $$
 
 $$= \begin{bmatrix} 
 0.11 & 0.22 & 0.31 & 0.42 \\
 0.02 & 0.01 & 0.02 & 0.01 \\
 0.21 & 0.31 & 0.11 & 0.41 \\
 0.32 & 0.42 & 0.52 & 0.62
-\end{bmatrix}$$
+\end{bmatrix} $$
 
 **Step 5：自注意力计算（单层简化）**
 
@@ -374,7 +374,7 @@ $$= \begin{bmatrix}
 0.22 & 0.01 & 0.31 & 0.42 \\
 0.31 & 0.02 & 0.11 & 0.52 \\
 0.42 & 0.01 & 0.41 & 0.62
-\end{bmatrix}$$
+\end{bmatrix} $$
 
 计算第一个元素（位置1对位置1的注意力）：
 
@@ -389,9 +389,9 @@ $$S = \begin{bmatrix}
 0.032 & 0.007 & 0.032 & 0.047 \\
 0.297 & 0.032 & 0.267 & 0.397 \\
 0.447 & 0.047 & 0.397 & 0.614
-\end{bmatrix}$$
+\end{bmatrix} $$
 
-缩放（$\sqrt{d_k} = \sqrt{4} = 2$）：
+缩放（ $\sqrt{d_k} = \sqrt{4} = 2$）：
 
 $$S' = \frac{S}{2}$$
 
@@ -410,7 +410,7 @@ $$A_{\text{weights}} \approx \begin{bmatrix}
 0.25 & 0.24 & 0.25 & 0.26 \\
 0.24 & 0.24 & 0.25 & 0.27 \\
 0.23 & 0.23 & 0.24 & 0.30
-\end{bmatrix}$$
+\end{bmatrix} $$
 
 **关键观察：位置2（被遮蔽）的注意力分布**
 
@@ -645,7 +645,7 @@ $$M = \begin{bmatrix}
 0 & 0 & -\infty & -\infty \\
 0 & 0 & 0 & -\infty \\
 0 & 0 & 0 & 0
-\end{bmatrix}$$
+\end{bmatrix} $$
 
 **效果：**
 
@@ -730,7 +730,7 @@ h_i^{(L)} &= \text{Transformer}^{(L)}(e_{\tilde{w}_i} + p_i) \\
 \text{Attention}(H) &= \text{softmax}\left(\frac{HW_Q \cdot (HW_K)^T}{\sqrt{d_k}} + M\right)HW_V \\
 m_i &= \mathbb{1}[\text{位置 } i \text{ 被遮蔽}] \\
 \tilde{w}_i &= \begin{cases} [\text{MASK}] & m_i=1 \\ w_i & m_i=0 \end{cases}
-\end{aligned}$$
+\end{aligned} $$
 
 ### 8.2 关键洞察
 

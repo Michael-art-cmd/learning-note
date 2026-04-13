@@ -406,8 +406,8 @@ Mini-batch 2: tokens b+1~2b
 
 #### 时间 vs $b$（右图）：
 - 总时间可分为两部分：
-  - 计算 $W_b$：$O(T \times d^2)$，与 $b$ 无关
-  - 计算 $z_1, \ldots, z_T$：$O(T \times b \times d)$
+  - 计算 $W_b$： $O(T \times d^2)$，与 $b$ 无关
+  - 计算 $z_1, \ldots, z_T$： $O(T \times b \times d)$
 
 **论文的选择：** $b = 16$，平衡效果与效率。
 
@@ -520,7 +520,7 @@ $$z_t = W_t x_t = \left(W_0 - \eta \sum_{s=1}^{t} G_s\right) x_t$$
 
 $$= W_0 x_t - 2\eta \sum_{s=1}^{t} (W_0 x_s - x_s) x_s^T x_t$$
 
-定义 $\delta_t = \sum_{s=1}^{t} (W_0 x_s - x_s) x_s^T x_t$，$\Delta = [\delta_1, \ldots, \delta_b]$。
+定义 $\delta_t = \sum_{s=1}^{t} (W_0 x_s - x_s) x_s^T x_t$， $\Delta = [\delta_1, \ldots, \delta_b]$。
 
 **Dual Form的核心公式：**
 
@@ -550,7 +550,7 @@ $$Z = W_0 X - 2\eta \Delta$$
 
 | 分析维度 | 解释 |
 |----------|------|
-| **理论复杂度** | Dual略高（$O(b^2 \times d)$额外项） |
+| **理论复杂度** | Dual略高（ $O(b^2 \times d)$额外项） |
 | **实际效果** | $d$通常几百， $b$仅16 → $b^2 \times d$很小 |
 | **硬件利用** | TensorCore饱和运行，抵消理论开销 |
 | **实验结果** | JAX实现中，Dual比Primal快**5倍以上** |
@@ -587,7 +587,7 @@ $$Z = W_0 X - 2\eta \Delta$$
 
 **定理条件：**
 - $f(x) = Wx$（线性模型）
-- Batch GD，$\eta = 1/2$
+- Batch GD， $\eta = 1/2$
 - $W_0 = 0$
 
 **证明：**

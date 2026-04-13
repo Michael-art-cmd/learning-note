@@ -145,7 +145,7 @@ $$\text{Linear Attention}: y_t = \sum_j v_j(k_j^T\cdot q_t)$$
 
 $$\text{重新排列}: y_t = \left(\sum_j v_j\cdot k_j^T\right)\cdot q_t = W_t\cdot q_t$$
 
-其中：$W_t = \sum_j v_j\cdot k_j^T$（outer product sum）
+其中： $W_t = \sum_j v_j\cdot k_j^T$（outer product sum）
 
 ### 3.2 Hidden state本质上是什么？
 
@@ -268,7 +268,7 @@ $$S_t = G_t \odot S_{t-1} - \beta_t(S_{t-1}\cdot k_t - v_t)\cdot k_t^T$$
 **Mamba2的核心**：
 - 状态空间模型(SSM)框架
 - 线性RNN的矩阵视角
-- Gating机制：$G_t = \gamma_t\cdot 1\cdot 1^T$
+- Gating机制： $G_t = \gamma_t\cdot 1\cdot 1^T$
 
 **Gated DeltaNet的贡献**：
 - 将Mamba2的scalar gate扩展为key-dependent β
