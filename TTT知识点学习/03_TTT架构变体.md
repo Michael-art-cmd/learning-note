@@ -24,22 +24,27 @@ $$h_t(x) = W_t x + b_t$$
 **输入**：token嵌入 $x_t \in \mathbb{R}^d$
 
 **预测输出**：
+
 $$\hat{y}_t = h_{t-1}(x_t) = W_{t-1} x_t + b_{t-1}$$
 
 **损失计算**：
+
 $$\mathcal{L}_t = \|x_t - \hat{y}_t\|^2$$
 
 ### 1.3 梯度计算
 
 **对 $W_{t-1}$ 的梯度**：
+
 $$\frac{\partial \mathcal{L}_t}{\partial W_{t-1}} = 2 (\hat{y}_t - x_t) x_t^\top$$
 
 **对 $b_{t-1}$ 的梯度**：
+
 $$\frac{\partial \mathcal{L}_t}{\partial b_{t-1}} = 2 (\hat{y}_t - x_t)$$
 
 ### 1.4 参数更新
 
 $$W_t = W_{t-1} - \eta \cdot 2 (\hat{y}_t - x_t) x_t^\top$$
+
 $$b_t = b_{t-1} - \eta \cdot 2 (\hat{y}_t - x_t)$$
 
 ### 1.5 内存占用
@@ -55,6 +60,7 @@ TTT-Linear的对偶形式可以直接计算闭式解：
 设 batch 内输入为 $X \in \mathbb{R}^{b \times d}$，目标为 $Y \in \mathbb{R}^{b \times d}$：
 
 $$W^* = (X^\top X + \lambda I)^{-1} X^\top Y$$
+
 $$b^* = \frac{1}{b}(Y - XW^*)^\top \mathbf{1}$$
 
 **优势**：
@@ -88,9 +94,11 @@ $$h_t(x) = W_2^{(t)} \sigma(W_1^{(t)} x + b_1^{(t)}) + b_2^{(t)}$$
 ### 2.2 前向传播
 
 **第一层**：
+
 $$h^{(1)} = \sigma(W_1^{(t-1)} x_t + b_1^{(t-1)})$$
 
 **第二层**：
+
 $$\hat{y}_t = W_2^{(t-1)} h^{(1)} + b_2^{(t-1)}$$
 
 ### 2.3 梯度计算
@@ -98,15 +106,21 @@ $$\hat{y}_t = W_2^{(t-1)} h^{(1)} + b_2^{(t-1)}$$
 TTT-MLP的梯度计算比TTT-Linear更复杂，需要反向传播：
 
 **输出层梯度**：
+
 $$\delta^{(out)} = 2(\hat{y}_t - x_t)$$
 
 **第二层梯度**：
+
 $$\nabla_{W_2} \mathcal{L} = \delta^{(out)} \cdot h^{(1)\top}$$
+
 $$\nabla_{b_2} \mathcal{L} = \delta^{(out)}$$
 
 **第一层梯度**：
+
 $$\delta^{(1)} = (W_2^{(t-1)\top} \delta^{(out)}) \odot \sigma'(W_1^{(t-1)} x_t + b_1^{(t-1)})$$
+
 $$\nabla_{W_1} \mathcal{L} = \delta^{(1)} \cdot x_t^\top$$
+
 $$\nabla_{b_1} \mathcal{L} = \delta^{(1)}$$
 
 ### 2.4 参数更新
@@ -158,6 +172,7 @@ Titans包含三个核心组件：
 **Memory as Context** 将长期记忆作为额外上下文：
 
 **架构**：
+
 $$y = \text{Attention}(q, [\text{PM}, \text{NLM}_t, c_t])$$
 
 其中：
@@ -166,6 +181,7 @@ $$y = \text{Attention}(q, [\text{PM}, \text{NLM}_t, c_t])$$
 - $c_t$：当前上下文（传统KV cache）
 
 **长期记忆更新**：
+
 $$\text{NLM}_t = \text{NLM}_{t-1} - \eta \nabla_{\text{NLM}} \mathcal{L}_t$$
 
 ### 3.4 MAG（Memory as Gating）
@@ -173,9 +189,11 @@ $$\text{NLM}_t = \text{NLM}_{t-1} - \eta \nabla_{\text{NLM}} \mathcal{L}_t$$
 **Memory as Gating** 使用记忆控制信息流动：
 
 **门控机制**：
+
 $$g_t = \sigma(W_g [\text{NLM}_t; q_t] + b_g)$$
 
 **输出**：
+
 $$y_t = g_t \cdot \text{Attention}(q_t, K_t, V_t) + (1-g_t) \cdot \text{NLM}_t$$
 
 **优势**：
@@ -196,7 +214,9 @@ Input -> TTT Layer (NLM) -> Attention -> Output
 - **注意力层**：处理当前上下文
 
 **输出**：
+
 $$h_t, \text{NLM}_t = \text{TTT-Layer}(x_t, \text{NLM}_{t-1})$$
+
 $$y_t = \text{Attention}(h_t, K_t, V_t)$$
 
 ### 3.6 变体对比

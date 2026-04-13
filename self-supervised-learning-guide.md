@@ -408,8 +408,11 @@ $$P(x_t | x_{<t}) = \text{softmax}(h_t^T E)$$
 计算 $h_3$ 与各词嵌入的点积：
 
 $$h_3 \cdot e_{\text{改变}} = 2.5$$
+
 $$h_3 \cdot e_{\text{研究}} = 1.0$$
+
 $$h_3 \cdot e_{\text{吃饭}} = 0.2$$
+
 $$h_3 \cdot e_{\text{跑步}} = 0.1$$
 
 softmax：

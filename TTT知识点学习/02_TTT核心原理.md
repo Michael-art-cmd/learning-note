@@ -47,12 +47,16 @@ $$y_t, h_t = \text{TTT-Layer}(x_t, c_{t-1}; \theta)$$
 TTT的核心创新在于将隐藏状态从**向量**转变为**模型**：
 
 **对于TTT-Linear**：
+
 $$h_t = (W_t, b_t)$$
+
 - $W_t \in \mathbb{R}^{d \times d}$：权重矩阵
 - $b_t \in \mathbb{R}^d$：偏置向量
 
 **对于TTT-MLP**：
+
 $$h_t = (W_1^{(t)}, b_1^{(t)}, W_2^{(t)}, b_2^{(t)})$$
+
 - 两层MLP的参数
 
 这使得隐藏状态的表达能力大大增强。
@@ -68,6 +72,7 @@ TTT使用**下一个token预测（Next Token Prediction, NTP）**作为自监督
 $$\mathcal{L}_{self-sup}(h_{t-1}, x_t) = -\log P_\theta(x_t | x_{<t})$$
 
 具体实现为重建损失：
+
 $$\mathcal{L}_{NTP}(h_{t-1}, x_t) = \|x_t - \text{Head}(h_{t-1}(x_t))\|^2$$
 
 其中 $h_{t-1}$ 将 $x_t$ 作为输入进行预测。
@@ -91,14 +96,17 @@ $$\mathcal{L}_t = \ell(g(h_{t-1}, x_t), x_t)$$
 TTT-E2E（End-to-End）同时优化两个目标：
 
 **1. 自监督损失（内循环）**：
+
 $$\mathcal{L}_{inner} = \sum_{t=1}^{n} \mathcal{L}_t(h_{t-1}, x_t)$$
 
 **2. 元学习损失（外循环）**：
+
 $$\mathcal{L}_{outer} = \sum_{t=1}^{n} \mathcal{L}_t(h_t', x_t)$$
 
 其中 $h_t'$ 是更新后的隐藏状态。
 
 **总损失**：
+
 $$\mathcal{L}_{total} = \mathcal{L}_{outer} + \lambda \mathcal{L}_{inner}$$
 
 ---
@@ -110,7 +118,9 @@ $$\mathcal{L}_{total} = \mathcal{L}_{outer} + \lambda \mathcal{L}_{inner}$$
 TTT使用**一阶随机梯度下降（One-step SGD）**更新隐藏状态：
 
 **对于TTT-Linear**：
+
 $$W_t = W_{t-1} - \eta \nabla_{W} \mathcal{L}_t$$
+
 $$b_t = b_{t-1} - \eta \nabla_{b} \mathcal{L}_t$$
 
 其中 $\eta$ 是内循环学习率。
@@ -118,17 +128,23 @@ $$b_t = b_{t-1} - \eta \nabla_{b} \mathcal{L}_t$$
 ### 3.2 梯度计算详解
 
 **步骤1：计算预测输出**
+
 $$\hat{y}_t = h_{t-1}(x_t) = W_{t-1} x_t + b_{t-1}$$
 
 **步骤2：计算损失**
+
 $$\mathcal{L}_t = \|\hat{y}_t - x_t\|^2$$
 
 **步骤3：计算梯度**
+
 $$\nabla_{W_{t-1}} \mathcal{L}_t = 2 (\hat{y}_t - x_t) x_t^\top$$
+
 $$\nabla_{b_{t-1}} \mathcal{L}_t = 2 (\hat{y}_t - x_t)$$
 
 **步骤4：更新隐藏状态**
+
 $$W_t = W_{t-1} - \eta \cdot 2 (\hat{y}_t - x_t) x_t^\top$$
+
 $$b_t = b_{t-1} - \eta \cdot 2 (\hat{y}_t - x_t)$$
 
 ### 3.3 累积机制
@@ -165,12 +181,15 @@ for t = 1 to n:
 **批量大小**：$b$
 
 **批量损失**：
+
 $$\mathcal{L}_{batch} = \frac{1}{b} \sum_{i=1}^{b} \mathcal{L}_{t+i}$$
 
 **批量梯度**：
+
 $$g = \frac{1}{b} \sum_{i=1}^{b} \nabla_h \mathcal{L}_{t+i}$$
 
 **批量更新**：
+
 $$h_{t+b} = h_t - \eta \cdot g$$
 
 ### 4.3 Dual Form（对偶形式）
@@ -186,6 +205,7 @@ TTT论文提出**对偶形式**来加速计算：
 利用矩阵恒等式直接计算闭式解：
 
 对于线性模型，TTT-Linear的更新可以表示为：
+
 $$W^* = (X^\top X + \lambda I)^{-1} X^\top Y$$
 
 其中 $X, Y$ 是batch内的输入输出矩阵。
@@ -201,6 +221,7 @@ $$W^* = (X^\top X + \lambda I)^{-1} X^\top Y$$
 - 定期更新一次参数
 
 **学习率调度**：
+
 $$\eta_t = \eta_{base} \cdot \text{schedule}(t)$$
 
 TTT论文配置：
@@ -214,6 +235,7 @@ TTT论文配置：
 ### 5.1 传统Transformer推理
 
 **自注意力机制**：
+
 $$y_t = \text{Attention}(q_t, K_{1:t}, V_{1:t})$$
 
 **特点**：

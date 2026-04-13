@@ -30,7 +30,9 @@ $h'(t) = Ah(t) + Bx(t)$
 $y(t) = Ch(t) + Dx(t)$
 
 离散化后得到：
+
 $$h_k = \bar{A}h_{k-1} + \bar{B}x_k$$
+
 $$y_k = Ch_k + Dx_k$$
 
 ### 1.2 Selective SSM的核心创新：打破LTI约束
@@ -121,6 +123,7 @@ $$\text{Capacity}(h) = N \times \text{precision\bits}$$
 ### 3.3 表达能力差异的根本原因
 
 **Mamba的瓶颈**：
+
 $$h_k = \bar{A}h_{k-1} + \bar{B}(x_k) \cdot x_k$$
 
 这是线性组合，每次更新只能执行"加权求和"操作。无法实现：
@@ -129,6 +132,7 @@ $$h_k = \bar{A}h_{k-1} + \bar{B}(x_k) \cdot x_k$$
 - 动态调整记忆容量
 
 **TTT的优势**：
+
 $$W_t = W_{t-1} - \eta \nabla_W \mathcal{L}(W_{t-1}; x_t)$$
 
 这是梯度下降，可以：

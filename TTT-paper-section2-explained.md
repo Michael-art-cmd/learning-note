@@ -59,11 +59,13 @@ TTT的核心idea是：
 论文给出了两个核心公式：
 
 #### 输出规则：
+
 $$z_t = f(x_t; W_t)$$
 
 **解释：** 输出token就是模型 $f$用更新后的权重 $W_t$对输入 $x_t$的预测。
 
 #### 更新规则：
+
 $$W_t = W_{t-1} - \eta \nabla \ell(W_{t-1}; x_t)$$
 
 **解释：** 权重通过一步梯度下降来更新，基于自监督损失 $\ell$。
@@ -457,9 +459,11 @@ Mini-batch解决了并行问题，但还有一个**硬件效率问题**：
 - 第一个mini-batch，大小为 $b$
 
 损失函数：
+
 $$\ell(W_0; x_t) = \|W_0 x_t - x_t\|^2$$
 
 梯度：
+
 $$G_t = \nabla \ell(W_0; x_t) = 2(W_0 x_t - x_t) x_t^T$$
 
 **问题分析：**
@@ -499,6 +503,7 @@ $$G_t = \nabla \ell(W_0; x_t) = 2(W_0 x_t - x_t) x_t^T$$
 $$W_b = W_0 - \eta \sum_{t=1}^{b} G_t = W_0 - 2\eta \sum_{t=1}^{b} (W_0 x_t - x_t) x_t^T$$
 
 **关键变换：**
+
 $$= W_0 - 2\eta (W_0 X - X) X^T$$
 
 **结果：** $W_b$可以通过**纯矩阵乘法**计算！
@@ -512,16 +517,19 @@ $$= W_0 - 2\eta (W_0 X - X) X^T$$
 $$z_t = W_t x_t = \left(W_0 - \eta \sum_{s=1}^{t} G_s\right) x_t$$
 
 展开：
+
 $$= W_0 x_t - 2\eta \sum_{s=1}^{t} (W_0 x_s - x_s) x_s^T x_t$$
 
 定义 $\delta_t = \sum_{s=1}^{t} (W_0 x_s - x_s) x_s^T x_t$，$\Delta = [\delta_1, \ldots, \delta_b]$。
 
 **Dual Form的核心公式：**
+
 $$\Delta = (W_0 X - X) \cdot \text{mask}(X^T X)$$
 
 其中 `mask` 是上三角掩码（类似attention mask）。
 
 **最终：**
+
 $$Z = W_0 X - 2\eta \Delta$$
 
 ---
@@ -585,12 +593,15 @@ $$Z = W_0 X - 2\eta \Delta$$
 **证明：**
 
 根据损失 $\ell$的定义：
+
 $$\nabla \ell(W_0; x_t) = -2(\theta_V x_t)(\theta_K x_t)^T$$
 
 根据Batch GD：
+
 $$W_t = W_0 - \eta \sum_{s=1}^{t} \nabla \ell(W_0; x_s) = \sum_{s=1}^{t} (\theta_V x_s)(\theta_K x_s)^T$$
 
 代入输出规则：
+
 $$z_t = W_t (\theta_Q x_t) = \sum_{s=1}^{t} (\theta_V x_s)(\theta_K x_s)^T (\theta_Q x_t)$$
 
 **这正是Linear Attention的定义！**
@@ -600,9 +611,11 @@ $$z_t = W_t (\theta_Q x_t) = \sum_{s=1}^{t} (\theta_V x_s)(\theta_K x_s)^T (\the
 ### 3. Linear Attention回顾
 
 标准Self-Attention：
+
 $$z_t = V_t \text{softmax}(K_t^T q_t)$$
 
 去掉softmax后：
+
 $$z_t = V_t (K_t^T q_t) = \sum_{s=1}^{t} v_s k_s^T q_t$$
 
 **对应关系：**

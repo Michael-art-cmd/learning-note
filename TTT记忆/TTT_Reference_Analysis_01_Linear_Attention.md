@@ -68,6 +68,7 @@ Hidden state $S_t$ 固定大小，不随序列长度增长 → **Transformers ar
 $$\nabla_W \ell = 2(Wx_t - x_t')(x_t)^T$$
 
 **Batch GD一步更新**
+
 $$（\eta = 1/2）：$$
 
 $$W_t = W_{t-1} - \eta \cdot 2(W_{t-1}k_t - v_t)k_t^T$$
@@ -142,7 +143,9 @@ TTT-MLP
 
 **继承**：
 - Hidden state固定大小
+
 $$（d\times d）$$
+
 - $O(1)$每token推理复杂度
 - 可递归实现
 
@@ -159,7 +162,9 @@ $$（d\times d）$$
 ### 思想演进
 
 **发现问题
+
 $$(O(n^2))$$ 
+
 → 技术绕过 → 理论深化 → 范式突破(test-time learning)**
 
 - **Linear Attention**：揭示线性化可行，但本质是"退化学习"
